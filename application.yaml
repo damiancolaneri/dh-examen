@@ -6,7 +6,7 @@ metadata:
 spec:
   source:
     path: app
-    repoURL: https://gitlab.com/adrabenche/dh-exercise.git
+    repoURL: https://github.com/damiancolaneri/dh-examen.git
     targetRevision: HEAD
   destination:
     server: "https://kubernetes.default.svc"
