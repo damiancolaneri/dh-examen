@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: dh-examen
+spec:
+  selector:
+    matchLabels:
+      app: hello-backend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hello-backend
+    spec:
+      containers:
+        - name: backend
+          image: "adrabenchedh/dh-examen:back"
+          env:
+            - name: PORT
+              value: "3000"
+            - name: MONGO_PORT
+              value: "27017"
+            - name: MONGO_HOST
+              value: "dataend"
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: backend
+  namespace: dh-examen
+spec:
+  type: ClusterIP
+  selector:
+    app: hello-backend
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000

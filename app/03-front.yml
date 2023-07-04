@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: dh-examen
+spec:
+  selector:
+    matchLabels:
+      app: hello-frontend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hello-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: "adrabenchedh/dh-examen:front"
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: frontend
+  namespace: dh-examen
+spec:
+  type: ClusterIP
+  selector:
+    app: hello-frontend
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 80
